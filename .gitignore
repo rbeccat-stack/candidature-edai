@@ -8,3 +8,7 @@ desktop.ini
 
 # Caches d'outils
 .impeccable/
+__pycache__/
+
+# Données sources du script (data.education.gouv.fr, ~65 Mo)
+sources/

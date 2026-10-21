@@ -11,7 +11,8 @@ Une page unique, `index.html`, jointe à la candidature de Rémi chez Ed.ai. Ses
 - **Un seul fichier, sans build.** Styles, données et scripts restent dans `index.html`, sans framework ni dépendance ajoutée. La page doit fonctionner ouverte en double-clic : pas de `fetch` vers un fichier local.
 - **Français, vouvoiement** envers l'équipe Ed.ai (« vos bureaux », « vos inscrits »). Phrases courtes, chiffres précis, pas de superlatifs.
 - **Couleurs uniquement via les tokens** de `:root`. Une nouvelle couleur se déclare dans les trois blocs : clair, `@media (prefers-color-scheme: dark)` et `:root[data-theme="dark"]`. Le canvas lit les tokens avec `css("--…")` : pas de couleur en dur dans `draw()`.
-- **`DATA` et `S` vont ensemble.** Aucun chiffre de `S` ne se modifie à la main sans être recalculé depuis `DATA` (contrôles listés dans le README). Quand un chiffre change, relire les textes écrits en dur listés dans le README.
+- **`DATA` et `S` viennent du script.** Ils ne se modifient jamais à la main : changer `scripts/construire_liste.py` puis le relancer avec `--html index.html` (procédure dans le README). Après une modification du script, vérifier que les chiffres ne bougent pas sans raison. Quand un chiffre change, relire les textes écrits en dur listés dans le README.
+- **Le fichier CRM et le script sont téléchargeables depuis la page.** Garder leurs liens, et la taille affichée, à jour.
 - **Pas de données de contact nominatives** (chefs d'établissement, e-mails, téléphones) : la page cible des établissements, pas des personnes (RGPD).
 
 ## Vérifier une modification

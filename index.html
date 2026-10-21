@@ -76,6 +76,10 @@ a{color:var(--blue)}
 @media (max-width:760px){.meth{grid-template-columns:1fr}}
 .meth ol{margin:0;padding-left:20px}
 .meth li{margin-bottom:8px}
+.dl{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+.dl li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;margin:0;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--chip)}
+.dl a{font-weight:700}
+.dl span{color:var(--muted);font-size:14px}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .more{margin-top:10px;font-size:14px;color:var(--muted)}
 </style>
@@ -138,6 +142,10 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:v
     </ol>
     <div>
       <p style="margin-top:0">Le script se relance à chaque rentrée et sort un fichier prêt à importer dans un CRM, avec l'identifiant UAI de chaque établissement.</p>
+      <ul class="dl">
+        <li><a href="edai_prive_academie_lyon.xlsx" download>Télécharger le fichier CRM</a><span>Excel · 126 comptes avec leurs UAI · 37 Ko</span></li>
+        <li><a href="scripts/construire_liste.py" download>Télécharger le script</a><span>Python · relit les données DEPP et l'annuaire · 13 Ko</span></li>
+      </ul>
       <p>Limites : les lycées professionnels ne sont pas inclus, et le marquage client repose uniquement sur les logos publics du site.</p>
     </div>
   </div>
