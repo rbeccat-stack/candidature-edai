@@ -11,6 +11,7 @@ Page d'étude jointe à ma candidature chez Ed.ai. Elle chiffre et priorise le s
 | `scripts/construire_liste.py` | Le script qui produit le fichier CRM et les données de la page, téléchargeable lui aussi |
 | `scripts/requirements.txt` | Sa seule dépendance : openpyxl |
 | `README.md` | Ce fichier : structure de la page, mise à jour, vérifications |
+| `PRODUCT.md`, `DESIGN.md` | Contexte produit et système visuel (charte Ed.ai), pour les prochaines modifications de design |
 | `CLAUDE.md` | Consignes pour les sessions Claude Code sur ce dossier |
 | `.gitignore` | Fichiers système et caches exclus du suivi |
 
@@ -18,19 +19,19 @@ Version d'origine : `Downloads/edai-prive-aura.html` (21/10/2026), livrée sans 
 
 ## Ouvrir la page
 
-- Double-clic sur `index.html` : tout fonctionne en local, seules les polices viennent de Google Fonts.
+- Double-clic sur `index.html` : tout fonctionne en local. Viennent d'internet : les polices (Google Fonts), Leaflet (cdnjs) et le fond de plan (tuiles OpenStreetMap). Sans connexion, la liste reste complète et la carte affiche un message.
 - Depuis Claude Code (app desktop) : aperçu `candidature-edai`, déclaré dans `.claude/launch.json` à la racine de l'espace de travail (port 8761).
 
 ## Comment la page est construite
 
 Dans l'ordre de `index.html` :
 
-1. **Styles** (`<style>`). Les couleurs sont des tokens sur `:root`, redéfinis pour le mode sombre à deux endroits : `@media (prefers-color-scheme: dark)` et `:root[data-theme="dark"]`. Polices : Fraunces (titres), Atkinson Hyperlegible (texte), Kalam (note manuscrite), JetBrains Mono (chiffres).
-2. **Contenu** : en-tête sur papier Seyès, bandeau de 4 chiffres clés (`#kpis`), carte (`<canvas id="map">`) et sa colonne « Lecture », liste filtrable (`#rows`), méthode, pied de page.
+1. **Styles** (`<style>`). Les couleurs sont des tokens sur `:root`, redéfinis pour le mode sombre à deux endroits : `@media (prefers-color-scheme: dark)` et `:root[data-theme="dark"]`. La palette et les typos sont celles d'ed.ai (Figtree pour les titres, Inter pour le texte, Kalam pour l'unique annotation manuscrite) ; tout le système est décrit dans [DESIGN.md](DESIGN.md).
+2. **Contenu** : en-tête sur halos et réglure Seyès, bandeau de 4 chiffres clés (`#kpis`), carte Leaflet (`#map`) avec ses filtres et sa colonne « Lecture », liste filtrable (`#rows`), méthode, pied de page.
 3. **Données** (`<script>`) :
    - `const DATA` : un objet par compte (126 objets, sur une seule ligne) ;
    - `const S` : les agrégats affichés dans le titre, les chiffres clés et la colonne « Lecture ».
-4. **Rendu** : chiffres clés, tableau (onglets Top 25 / Tous les comptes, filtre texte), carte en projection équirectangulaire, redessinée quand le thème change.
+4. **Rendu** : chiffres clés, tableau (onglets Top 25 / Tous les comptes, filtre texte), carte Leaflet sur tuiles OpenStreetMap (désaturées en CSS, inversées en mode sombre). Un clic sur un point ouvre sa fiche et surligne sa ligne ; un clic sur un nom de la liste déplace la carte vers le compte. La molette ne zoome qu'après un clic sur la carte, pour ne pas bloquer le défilement.
 
 ### Champs de `DATA`
 
@@ -67,20 +68,20 @@ Dans l'ordre de `index.html` :
    - le paragraphe sur le Centre scolaire Notre-Dame ;
    - le tarif de 6 € par matière (sous-titre de la liste) et les coefficients du score (section « Méthode ») ;
    - la taille des fichiers dans les liens de téléchargement (section « Méthode »).
-6. Paramètres de la carte, dans la fonction `draw()` de la page : coordonnées des bureaux (`45.7487, 4.8436`), rayons de 20 et 50 km, villes repères.
+6. Paramètres de la carte, dans le script de la page : coordonnées des bureaux (constante `HQ`, `45.7487, 4.8436`) et rayons de 20 et 50 km (fonction `initMap()`).
 
 ## Avant d'envoyer ou de publier
 
 - [ ] Mode clair et mode sombre
 - [ ] Largeur mobile (375 px) : la page ne défile pas horizontalement (seul le tableau défile)
 - [ ] Onglets Top 25 / Tous les comptes et filtre texte
-- [ ] Survol de la carte (infobulle) et liens « site »
+- [ ] Carte : fond de plan visible, fiche au clic sur un point, déplacement au clic sur un nom de la liste, filtres de légende ; liens « site »
 - [ ] Console du navigateur sans erreur
 - [ ] Les deux liens de téléchargement de la section « Méthode »
 
 ## Points ouverts
 
 - Les « 174 établissements » sont 174 lignes collège ou lycée GT pour 171 UAI : trois lycées polyvalents ont aussi une petite section collège.
-- L'infobulle de la carte ne réagit qu'à la souris : rien ne s'affiche au toucher sur mobile.
+- Le fond de plan vient des serveurs d'OpenStreetMap, gratuits pour un trafic modeste avec attribution (affichée en bas de la carte). Le fond CARTO, plus épuré, demande désormais une clé d'API (constaté le 21/10/2026).
 - 7 comptes n'ont pas de site, et 14 sites sont en `http://`.
 - `S.clients_probables` contient trois fois « NOTRE DAME » : des établissements différents au même nom, qu'on ne distingue pas sans la commune.
