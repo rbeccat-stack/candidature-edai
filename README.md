@@ -48,7 +48,7 @@ Dans l'ordre de `index.html` :
 
 ## Mettre à jour les données (à chaque rentrée)
 
-`scripts/construire_liste.py` produit le fichier CRM et les données de la page (`DATA` et `S`) à partir des données ouvertes de l'Éducation nationale. Relancé sur les fichiers de la rentrée 2025, il redonne la page à l'octet près et l'export d'origine cellule par cellule (vérifié le 21/10/2026). Les paramètres (tarif, bonus du score, coordonnées des bureaux, clients probables) sont des constantes en tête du script.
+`scripts/construire_liste.py` produit le fichier CRM et les données de la page (`DATA` et `S`) à partir des données ouvertes de l'Éducation nationale. Relancé sur les fichiers de la rentrée 2025, il redonne exactement les données de la page publiée et le fichier CRM. Avant le retrait de Notre-Dame de Mongré des clients probables, il redonnait aussi l'export d'origine, cellule par cellule (vérifié le 21/10/2026). Les paramètres (tarif, bonus du score, coordonnées des bureaux, clients probables) sont des constantes en tête du script.
 
 1. Télécharger les trois fichiers CSV dans un dossier `sources/` à la racine du projet (ignoré par git, environ 65 Mo) :
    - [effectifs des collèges](https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-college-effectifs-niveau-sexe-lv/exports/csv?delimiter=%3B)
@@ -80,7 +80,6 @@ Dans l'ordre de `index.html` :
 
 ## Points ouverts
 
-- Notre-Dame de Mongré (Villefranche) est marqué client probable, mais son site est mongre.org, pas csnd.fr. S'il n'est pas client, il entre dans le top 25 à la 7e place (score 15 430).
 - Les « 174 établissements » sont 174 lignes collège ou lycée GT pour 171 UAI : trois lycées polyvalents ont aussi une petite section collège.
 - L'infobulle de la carte ne réagit qu'à la souris : rien ne s'affiche au toucher sur mobile.
 - 7 comptes n'ont pas de site, et 14 sites sont en `http://`.

@@ -35,8 +35,8 @@ TAILLE_TOP = 25
 
 # Réseau Centre scolaire Notre-Dame (logo sur le site d'Ed.ai), relevé à la main.
 # À vérifier sur csnd.fr : ces comptes sont gardés dans la liste mais sortis du top.
+# Notre-Dame de Mongré (Villefranche) en a été retiré le 21/10/2026.
 CLIENTS_PROBABLES = {
-    ("NOTRE DAME DE MONGRE", "VILLEFRANCHE-SUR-SAONE"),
     ("NOTRE DAME DE BEL AIR", "TARARE"),
     ("NOTRE DAME", "VILLEFRANCHE-SUR-SAONE"),
     ("NOTRE DAME", "BELLEVILLE-EN-BEAUJOLAIS"),
