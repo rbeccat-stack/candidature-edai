@@ -18,9 +18,9 @@
   --violet:#5e58f4; --violet-tint:rgba(94,88,244,.10); --on-violet:#ffffff;
   --cyan:#02b3ff; --cyan-ink:#00719f; --cyan-tint:rgba(2,179,255,.12);
   --dot:#a9a5e4; --ring:#8d88c9; --pin-ring:#ffffff;
-  --glow-1:rgba(0,128,255,.11); --glow-2:rgba(203,102,226,.18); --seyes:rgba(94,88,244,.09); --margin:rgba(203,102,226,.55);
+  --glow-1:rgba(0,128,255,.11); --glow-2:rgba(203,102,226,.18); --seyes:rgba(94,88,244,.07); --seyes-major:rgba(94,88,244,.16); --margin:rgba(203,102,226,.55);
   --tip-bg:#291846; --tip-fg:#ffffff; --shadow:rgba(41,24,70,.16);
-  --tiles-filter:grayscale(1) contrast(.9) brightness(1.06); --tiles-opacity:.72;
+  --tiles-filter:grayscale(1) contrast(.82) brightness(1.1);
   --f-display:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-hand:"Kalam", "Segoe Print", "Comic Sans MS", cursive;
@@ -31,18 +31,18 @@
   --violet:#8f8aff; --violet-tint:rgba(143,138,255,.16); --on-violet:#120c22;
   --cyan:#3cc7ff; --cyan-ink:#6fd6ff; --cyan-tint:rgba(60,199,255,.14);
   --dot:#5c5694; --ring:#7d78b8; --pin-ring:#120c22;
-  --glow-1:rgba(0,128,255,.16); --glow-2:rgba(203,102,226,.16); --seyes:rgba(143,138,255,.08); --margin:rgba(203,102,226,.45);
+  --glow-1:rgba(0,128,255,.16); --glow-2:rgba(203,102,226,.16); --seyes:rgba(143,138,255,.06); --seyes-major:rgba(143,138,255,.15); --margin:rgba(203,102,226,.45);
   --tip-bg:#efefff; --tip-fg:#291846; --shadow:rgba(0,0,0,.45);
-  --tiles-filter:grayscale(1) invert(1) brightness(.82) contrast(.9); --tiles-opacity:.62; color-scheme:dark}}
+  --tiles-filter:grayscale(1) invert(1) brightness(.74) contrast(.82); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#120c22; --surface:#1a1330; --lav:#1f1838; --lav-2:#2d2452; --line:#2a2246;
   --ink:#f3f1ff; --text:#dedbf3; --muted:#a8a5c6;
   --violet:#8f8aff; --violet-tint:rgba(143,138,255,.16); --on-violet:#120c22;
   --cyan:#3cc7ff; --cyan-ink:#6fd6ff; --cyan-tint:rgba(60,199,255,.14);
   --dot:#5c5694; --ring:#7d78b8; --pin-ring:#120c22;
-  --glow-1:rgba(0,128,255,.16); --glow-2:rgba(203,102,226,.16); --seyes:rgba(143,138,255,.08); --margin:rgba(203,102,226,.45);
+  --glow-1:rgba(0,128,255,.16); --glow-2:rgba(203,102,226,.16); --seyes:rgba(143,138,255,.06); --seyes-major:rgba(143,138,255,.15); --margin:rgba(203,102,226,.45);
   --tip-bg:#efefff; --tip-fg:#291846; --shadow:rgba(0,0,0,.45);
-  --tiles-filter:grayscale(1) invert(1) brightness(.82) contrast(.9); --tiles-opacity:.62; color-scheme:dark}
+  --tiles-filter:grayscale(1) invert(1) brightness(.74) contrast(.82); color-scheme:dark}
 
 body{background:var(--bg);color:var(--text);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;caret-color:var(--violet);accent-color:var(--violet);scrollbar-color:var(--lav-2) transparent}
 ::selection{background:var(--violet-tint);color:var(--ink)}
@@ -52,20 +52,22 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* En-tête : halos d'ed.ai sur une réglure de copie */
-.hero{position:relative;overflow:hidden;background:radial-gradient(620px 520px at 0 0,var(--glow-1),transparent 72%),radial-gradient(760px 560px at 100% 100%,var(--glow-2),transparent 72%)}
+.hero{position:relative}
+.hero::after{content:"";position:absolute;inset:0 0 -260px;z-index:-1;pointer-events:none;background:radial-gradient(620px 520px at 0 0,var(--glow-1),transparent 72%),radial-gradient(760px 380px at 100% 55%,var(--glow-2),transparent 72%)}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(var(--seyes) 1px,transparent 1px),linear-gradient(90deg,var(--seyes) 1px,transparent 1px);
-  background-size:100% 8px,32px 100%;
+  background-image:linear-gradient(var(--seyes-major) 1px,transparent 1px),linear-gradient(var(--seyes) 1px,transparent 1px),linear-gradient(90deg,var(--seyes) 1px,transparent 1px);
+  background-size:100% 32px,100% 8px,32px 100%;
   -webkit-mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 70%,transparent)}
 .hero .wrap{position:relative;padding-block:72px 56px}
-.hero .in{border-left:2px solid var(--margin);padding-left:24px;max-width:780px}
+.hero .wrap::before{content:"";position:absolute;top:0;bottom:0;left:max(16px,env(safe-area-inset-left,0px));width:1.5px;background:var(--margin)}
+.hero .in{padding-left:24px;max-width:780px}
 h1{font:600 clamp(34px,5.4vw,58px)/1.06 var(--f-display);color:var(--ink);letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance}
 h1 em{font-style:normal;background:linear-gradient(90deg,var(--violet) 25%,var(--cyan) 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
 @media (forced-colors: active){h1 em{background:none;color:CanvasText}}
 .lede{max-width:62ch;font-size:18px;line-height:1.6;margin:0}
 .lede b{color:var(--violet);font-weight:600}
-.source{display:flex;align-items:center;gap:10px;margin:18px 0 0;color:var(--muted);font-size:14px}
-.source::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--violet);flex:none}
+.source{display:flex;align-items:flex-start;gap:10px;margin:18px 0 0;color:var(--muted);font-size:14px}
+.source::before{content:"";width:8px;height:8px;margin-top:calc(.8em - 4px);border-radius:50%;background:var(--violet);flex:none}
 .note{font:22px/1.3 var(--f-hand);color:var(--violet);margin:22px 0 0;max-width:44ch;transform:rotate(-1deg);transform-origin:left}
 
 main{padding-block:0 72px}
@@ -86,7 +88,7 @@ h2{font:600 clamp(26px,3.2vw,34px)/1.15 var(--f-display);color:var(--ink);letter
 .mapbox{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:32px;align-items:start}
 @media (max-width:860px){.mapbox{grid-template-columns:1fr}}
 .map{height:580px;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:var(--lav);isolation:isolate}
-@media (max-width:760px){.map{height:460px;border-radius:20px}}
+@media (max-width:760px){.map{height:auto;aspect-ratio:1/1;border-radius:20px}}
 .map-fallback{margin:0;padding:24px;color:var(--muted)}
 .maptools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
 .chip{display:inline-flex;align-items:center;gap:8px;font:500 13px var(--f-body);color:var(--text);background:var(--lav);border:1px solid transparent;border-radius:999px;padding:7px 14px;cursor:pointer;transition:background-color .15s ease,opacity .15s ease}
@@ -102,7 +104,7 @@ h2{font:600 clamp(26px,3.2vw,34px)/1.15 var(--f-display);color:var(--ink);letter
 .side strong{color:var(--violet)}
 
 .leaflet-container{font:14px/1.45 var(--f-body);background:var(--lav)}
-.leaflet-tile-pane{filter:var(--tiles-filter);opacity:var(--tiles-opacity)}
+.leaflet-tile-pane{filter:var(--tiles-filter)}
 .leaflet-container a{color:var(--violet)}
 .leaflet-bar{border:1px solid var(--line)!important;border-radius:14px!important;overflow:hidden;box-shadow:0 6px 18px var(--shadow)!important}
 .leaflet-bar a{background:var(--surface);color:var(--ink);border-bottom-color:var(--line)}
@@ -125,8 +127,9 @@ h2{font:600 clamp(26px,3.2vw,34px)/1.15 var(--f-display);color:var(--ink);letter
 .pin:hover span{transform:scale(1.12)}
 .hq span{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:4px;background:var(--ink);border:2px solid var(--pin-ring);transform:rotate(45deg)}
 .hq b{position:absolute;left:14px;top:-11px;white-space:nowrap;font:600 12px var(--f-display);color:var(--ink);background:var(--surface);border-radius:999px;padding:3px 9px;box-shadow:0 3px 10px var(--shadow)}
-.map.far .hq b{display:none}
-.ring-label{font:600 12px/20px var(--f-body);color:var(--muted);text-align:center;text-shadow:0 0 3px var(--bg),0 0 6px var(--bg)}
+.ring-label.r50{text-align:right}
+.map.far .hq b,.map.low .ring-label.r20{display:none}
+.ring-label{font:600 12px/20px var(--f-body);color:var(--muted);text-align:left;text-shadow:0 0 3px var(--bg),0 0 6px var(--bg)}
 
 /* Liste */
 .tabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
@@ -147,6 +150,8 @@ td.rk{font:700 15px var(--f-display);color:var(--violet);width:3ch;font-variant-
 .go{font:600 15px/1.4 var(--f-body);color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-align:left}
 .go:hover{color:var(--violet);text-decoration:underline;text-underline-offset:3px}
 td .c{color:var(--muted);font-size:13px}
+.pill-m{display:none}
+@media (max-width:600px){table{min-width:0;font-size:14px}th,td{padding-left:8px;padding-right:8px}th{white-space:normal}.col-niv,.col-site{display:none}.pill-m{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:6px;font-size:13px}.pill-m .pill{padding:2px 8px}}
 .pill{display:inline-block;font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--lav);color:var(--text);white-space:nowrap}
 .pill.both{background:var(--violet-tint);color:var(--violet)}
 .pill.client{background:var(--cyan-tint);color:var(--cyan-ink)}
@@ -218,7 +223,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
     <input id="q" type="search" placeholder="Filtrer par nom ou commune" aria-label="Filtrer par nom ou commune">
   </div>
   <div class="tbl"><table>
-    <thead><tr><th>#</th><th>Ensemble scolaire</th><th class="n">Km</th><th>Niveaux</th><th class="n">Élèves</th><th class="n">€/an · 1 matière</th><th>Site</th></tr></thead>
+    <thead><tr><th>#</th><th>Ensemble scolaire</th><th class="n">Km</th><th class="col-niv">Niveaux</th><th class="n">Élèves</th><th class="n">€/an · 1 matière</th><th class="col-site">Site</th></tr></thead>
     <tbody id="rows"></tbody>
   </table></div>
   <p class="more" id="count"></p>
@@ -311,7 +316,7 @@ function render(){
   document.getElementById("rows").innerHTML = rows.map(d => {
     const site = d.web ? `<a href="${href(d.web)}" target="_blank" rel="noopener">site</a>` : "";
     const pill = d.client_probable ? `<span class="pill client">client probable</span>` : `<span class="pill${d.niveaux.includes("+")?" both":""}">${esc(d.niveaux)}</span>`;
-    return `<tr data-i="${d.i}"${d.i===sel?' class="sel"':""}><td class="rk">${d.rang||""}</td><td><button type="button" class="go" data-i="${d.i}">${title(d.nom)}</button><div class="c">${title(d.commune)}</div></td><td class="n">${d.km_siege==null?"":fmt(Math.round(d.km_siege))}</td><td>${pill}</td><td class="n">${fmt(d.eleves)}</td><td class="n">${fmt(d.arr_1_matiere)}</td><td>${site}</td></tr>`;
+    return `<tr data-i="${d.i}"${d.i===sel?' class="sel"':""}><td class="rk">${d.rang||""}</td><td><button type="button" class="go" data-i="${d.i}">${title(d.nom)}</button><div class="c">${title(d.commune)}</div><div class="pill-m">${pill}${site}</div></td><td class="n">${d.km_siege==null?"":fmt(Math.round(d.km_siege))}</td><td class="col-niv">${pill}</td><td class="n">${fmt(d.eleves)}</td><td class="n">${fmt(d.arr_1_matiere)}</td><td class="col-site">${site}</td></tr>`;
   }).join("");
   document.getElementById("count").textContent = rows.length + (rows.length>1?" comptes affichés":" compte affiché");
 }
@@ -329,7 +334,7 @@ document.getElementById("rows").addEventListener("click", e => {
 });
 render();
 
-// Plan : fond CARTO, points en couleurs Ed.ai, fiche au clic
+// Plan : fond OpenStreetMap désaturé, points en couleurs Ed.ai, fiche au clic
 const mapEl = document.getElementById("map");
 const HQ = [45.7487, 4.8436];
 const kindOf = d => d.client_probable ? "client" : d.top25 ? "top" : "other";
@@ -348,15 +353,15 @@ const fiche = d => {
 };
 
 function initMap(){
-  map = L.map(mapEl, {scrollWheelZoom: false, zoomSnap: .25});
+  map = L.map(mapEl, {scrollWheelZoom: false, zoomSnap: 1});
   map.zoomControl.setPosition("topright");
   // Plan OpenStreetMap, désaturé et teinté en CSS (.leaflet-tile-pane) pour rester dans la charte
   tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">contributeurs OpenStreetMap</a>'}).addTo(map);
   for (const km of [20, 50]) {
     rings.push(L.circle(HQ, {radius: km * 1000, color: css("--ring"), weight: 1.5, dashArray: "5 7", fill: false, interactive: false}).addTo(map));
-    // Étiquette posée à l'est du cercle, côté Isère, où il n'y a presque pas de comptes
-    L.marker([HQ[0], HQ[1] + km / (111.2 * Math.cos(HQ[0] * Math.PI / 180))], {icon: L.divIcon({className: "ring-label", html: km + " km", iconSize: [56, 20], iconAnchor: [28, 10]}), interactive: false, keyboard: false}).addTo(map);
+    // Étiquette à l'est du cercle, côté Isère : « 20 km » juste à l'extérieur, « 50 km » à l'intérieur pour rester dans le cadre
+    L.marker([HQ[0], HQ[1] + km / (111.2 * Math.cos(HQ[0] * Math.PI / 180))], {icon: L.divIcon({className: "ring-label r" + km, html: km + " km", iconSize: [56, 20], iconAnchor: km === 50 ? [60, 10] : [-4, 10]}), interactive: false, keyboard: false}).addTo(map);
   }
   L.marker(HQ, {icon: L.divIcon({className: "hq", html: "<span></span><b>Vos bureaux</b>", iconSize: [0, 0]}), interactive: false, keyboard: false, zIndexOffset: 2000}).addTo(map);
   for (const k of ["other", "client", "top"]) groups[k] = L.featureGroup().addTo(map);
@@ -377,10 +382,15 @@ function initMap(){
     markers[d.i] = m;
   }
   home = L.latLngBounds(DATA.map(d => [d.lat, d.lon])).pad(.04);
-  // L'étiquette « Vos bureaux » ne s'affiche qu'à partir du zoom 10, où elle ne cache plus le top 25 lyonnais
-  const label = () => mapEl.classList.toggle("far", map.getZoom() < 10);
+  // « Vos bureaux » s'affiche à partir du zoom 10, « 20 km » à partir du zoom 9 : avant, ils cachent le top 25 lyonnais ou l'étiquette « 50 km »
+  const label = () => {
+    mapEl.classList.toggle("far", map.getZoom() < 10);
+    mapEl.classList.toggle("low", map.getZoom() < 9);
+  };
   map.on("zoomend", label);
-  map.fitBounds(home);
+  // La vue de départ cadre le top 25 ; « Vue d'ensemble » montre les 126 comptes
+  const prio = L.latLngBounds(DATA.filter(d => d.top25).map(d => [d.lat, d.lon])).pad(.06);
+  map.fitBounds(prio);
   label();
   // La molette ne zoome qu'après un clic sur le plan, pour ne pas bloquer le défilement de la page
   map.on("click", () => map.scrollWheelZoom.enable());
